@@ -1,0 +1,50 @@
+.chatbot-input {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.chatbot-input.light {
+  background-color: #f9f9f9;
+}
+
+.chatbot-input.dark {
+  background-color: #1a1a1a;
+}
+
+.chatbot-input textarea {
+  flex: 1;
+  resize: none;
+  padding: 10px;
+  font-size: 1em;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  margin-right: 10px;
+  max-height: 100px;
+}
+
+.chatbot-input.light textarea {
+  background-color: #fff;
+  color: #000;
+}
+
+.chatbot-input.dark textarea {
+  background-color: #40444b;
+  color: #fff;
+}
+
+.send-icon {
+  cursor: pointer;
+  color: #007bff;
+}
+
+.send-icon svg {
+  width: 24px;
+  height: 24px;
+  transform: rotate(45deg);
+}
+
+.send-icon:hover {
+  color: #0056b3;
+}

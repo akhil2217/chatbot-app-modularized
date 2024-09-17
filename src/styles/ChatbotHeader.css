@@ -1,0 +1,37 @@
+.chatbot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  position: relative;
+}
+
+.chatbot-header.light {
+  background-color: #007bff;
+  color: white;
+}
+
+.chatbot-header.dark {
+  background-color: #333;
+  color: white;
+}
+
+.chatbot-header h2 {
+  margin: 0;
+  font-size: 1.2em;
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+}
+
+.header-icons svg {
+  margin-left: 15px;
+  cursor: pointer;
+  color: white;
+}
+
+.header-icons svg:hover {
+  color: #ccc;
+}
