@@ -17,12 +17,11 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "noFallthroughCasesInSwitch": true,
     "downlevelIteration": true,
     "useDefineForClassFields": true
   },
   "include": [
-    "src"
-  ]
+    "src" ]
 }

@@ -1,62 +1,62 @@
+
 import React from 'react';
-import { Message as MessageType } from './types';
+import { MessageType } from './types';
+import {
+  FaUser,
+  FaRobot,
+  FaRegCopy,
+  FaThumbsUp,
+  FaThumbsDown,
+} from 'react-icons/fa';
+import TypingIndicator from './TypingIndicator';
 import '../styles/Message.css';
 
 interface MessageProps {
-  message: MessageType;
+  msg: MessageType;
+  index: number;
   theme: 'light' | 'dark';
-  onLike: () => void;
-  onDislike: () => void;
-  onCopy: () => void;
+  copyMessage: (text: string) => void;
+  likeMessage: (index: number) => void;
+  dislikeMessage: (index: number) => void;
 }
 
-const Message: React.FC<MessageProps> = ({ message, theme, onLike, onDislike, onCopy }) => (
-  <div className={`message ${message.sender}`}>
-    <div className="message-content">
-      <div className="icon-wrapper">
-        {message.sender === 'me' ? (
-          <img src={process.env.PUBLIC_URL + '/assets/icons/user.svg'} alt="User Icon" className="icon" />
-        ) : (
-          <img src={process.env.PUBLIC_URL + '/assets/icons/robot.svg'} alt="Robot Icon" className="icon" />
-        )}
-      </div>
-      <div className={`bubble ${theme}`}>
-        {message.isTyping ? (
-          <div className="typing-indicator">
-            <div className="dot"></div>
-            <div className="dot"></div>
-            <div className="dot"></div>
-          </div>
-        ) : (
-          message.text
-        )}
-        {message.sender === 'bot' && !message.isTyping && (
-          <div className={`message-actions ${theme}`}>
-            <img
-              src={process.env.PUBLIC_URL + '/assets/icons/copy.svg'}
-              alt="Copy"
-              className="action-icon"
-              onClick={onCopy}
-            />
-            <img
-              src={process.env.PUBLIC_URL + '/assets/icons/thumbs-up.svg'}
-              alt="Like"
-              className="action-icon"
-              onClick={onLike}
-            />
-            {message.likes || 0}
-            <img
-              src={process.env.PUBLIC_URL + '/assets/icons/thumbs-down.svg'}
-              alt="Dislike"
-              className="action-icon"
-              onClick={onDislike}
-            />
-            {message.dislikes || 0}
-          </div>
-        )}
+const Message: React.FC<MessageProps> = ({
+  msg,
+  index,
+  theme,
+  copyMessage,
+  likeMessage,
+  dislikeMessage,
+}) => {
+  return (
+    <div className={`message ${msg.sender}`}>
+      <div className={`message-content ${msg.sender}`}>
+        <div className={`icon-wrapper ${msg.sender}`}>
+          {msg.sender === 'me' ? <FaUser /> : <FaRobot />}
+        </div>
+        <div className={`bubble ${msg.sender}`}>
+          {msg.isTyping && !msg.text ? (
+            <TypingIndicator />
+          ) : (
+            msg.text
+          )}
+          {msg.sender === 'bot' && !msg.isTyping && (
+            <div className={`message-actions ${theme}`}>
+              <FaRegCopy onClick={() => copyMessage(msg.text)} />
+              <FaThumbsUp
+                onClick={() => !msg.reaction && likeMessage(index)}
+                className={msg.reaction === 'like' ? 'liked' : ''}
+              />
+              <FaThumbsDown
+                onClick={() => !msg.reaction && dislikeMessage(index)}
+                className={msg.reaction === 'dislike' ? 'disliked' : ''}
+              />
+            </div>
+          )}
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default Message;

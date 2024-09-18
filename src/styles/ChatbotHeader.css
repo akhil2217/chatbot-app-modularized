@@ -1,3 +1,5 @@
+/* src/components/ChatbotHeader.css */
+
 .chatbot-header {
   display: flex;
   justify-content: space-between;
@@ -6,14 +8,10 @@
   position: relative;
 }
 
-.chatbot-header.light {
-  background-color: #007bff;
-  color: white;
-}
-
+.chatbot-header.light,
 .chatbot-header.dark {
-  background-color: #333;
-  color: white;
+  background-color: #05314D; /* Primary Color */
+  color: white; /* Text Color */
 }
 
 .chatbot-header h2 {
@@ -27,11 +25,39 @@
 }
 
 .header-icons svg {
-  margin-left: 15px;
+  margin-left: 10px;
   cursor: pointer;
-  color: white;
+  color: white; /* Icon Color */
 }
 
 .header-icons svg:hover {
-  color: #ccc;
+  color: #CBC8C3; /* Secondary Color */
+}
+
+/* Dialog Styles */
+.dialog-paper {
+  background-color: #f8f9fa !important; /* Background Color */
+  color: black !important; /* Text Color */
+}
+
+.dialog-title {
+  background-color: #05314D; /* Primary Color */
+  color: white; /* Text Color */
+  padding: 16px;
+}
+
+.dialog-content {
+  padding: 16px;
+}
+
+.dialog-actions {
+  padding: 8px 16px;
+}
+
+.dialog-button {
+  color: #05314D; /* Primary Color */
+}
+
+.dialog-button:hover {
+  background-color: #CBC8C3; /* Secondary Color */
 }

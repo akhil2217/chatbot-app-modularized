@@ -1,56 +1,43 @@
+// src/components/ChatbotMessages.tsx
+
 import React from 'react';
 import Message from './Message';
-import { Message as MessageType } from './types';
+import { MessageType } from './types';
 import '../styles/ChatbotMessages.css';
 
 interface ChatbotMessagesProps {
-  theme: 'light' | 'dark';
   messages: MessageType[];
-  messageEndRef: React.RefObject<HTMLDivElement>;
+  theme: 'light' | 'dark';
+  copyMessage: (text: string) => void;
   likeMessage: (index: number) => void;
   dislikeMessage: (index: number) => void;
-  copyMessage: (text: string) => void;
-  isTyping: boolean;
+  messageEndRef: React.RefObject<HTMLDivElement>;
 }
 
 const ChatbotMessages: React.FC<ChatbotMessagesProps> = ({
-  theme,
   messages,
-  messageEndRef,
+  theme,
+  copyMessage,
   likeMessage,
   dislikeMessage,
-  copyMessage,
-  isTyping
-}) => (
-  <div className={`chatbot-messages ${theme}`}>
-    {messages.map((msg, index) => (
-      <Message
-        key={index}
-        message={msg}
-        theme={theme}
-        onLike={() => likeMessage(index)}
-        onDislike={() => dislikeMessage(index)}
-        onCopy={() => copyMessage(msg.text)}
-      />
-    ))}
-    {isTyping && (
-      <div className="message bot">
-        <div className="message-content">
-          <div className="icon-wrapper">
-            <div className="fas fa-robot bot-icon"></div>
-          </div>
-          <div className="bubble">
-            <div className="typing-indicator">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    )}
-    <div ref={messageEndRef} />
-  </div>
-);
+  messageEndRef,
+}) => {
+  return (
+    <div className={`chatbot-messages ${theme}`}>
+      {messages.map((msg, index) => (
+        <Message
+          key={index}
+          msg={msg}
+          index={index}
+          theme={theme}
+          copyMessage={copyMessage}
+          likeMessage={likeMessage}
+          dislikeMessage={dislikeMessage}
+        />
+      ))}
+      <div ref={messageEndRef} />
+    </div>
+  );
+};
 
 export default ChatbotMessages;
